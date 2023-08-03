@@ -4,27 +4,18 @@ About the project:
 The Work-Related Fatality Study is a comprehensive analysis of fatal incidents that occurred in various workplaces. The project aims to examine and understand the factors contributing to work-related fatalities, identify trends and patterns, and provide insights to improve workplace safety measures.
 
 Columns:
-
 1. ID: This column represents a unique identifier assigned to each incident. It helps in distinguishing and referencing specific incidents in the dataset.
-
 2. Incident Date: This column records the date when the fatal incident occurred. It provides a chronological timeline for analyzing the incidents over a specific period.
-
 3. Day of the Week: This column captures the day of the week corresponding to the incident date. It helps in examining whether certain days of the week have a higher frequency of work-related fatalities.
-
 4. City: This column contains the name of the city where the incident took place. It provides geographical information about the location of the incident.
-
 5. State: This column records the state where the incident occurred. It helps in analyzing work-related fatalities based on different states and identifying regional trends.
-
 6. Description: This column provides a detailed description of the incident, including the circumstances, causes, and contributing factors. It helps in understanding the nature of the incidents and identifying common themes or risks.
-
 7. Plan: This column indicates any existing safety plans or protocols that were in place at the workplace. It helps in evaluating the effectiveness of safety measures and identifying areas for improvement.
-
 8. Citation: This column captures information about any citations issued by regulatory authorities, such as OSHA, in relation to the incident. It indicates whether violations of safety regulations were identified and recorded.
-
 9. Unnamed : This column contains 0 for all the rows. And it is not required for the analysis.
 Project Description: 
 
-This project will train you how to use SQL to analyze a real-world database, how to extract the most useful information from the dataset, how to pre-process the data using Python for improved performance, and how to use a structured query language to retrieve useful information from the database.
+In this project, I use SQL to analyze a real-world database, extract the most useful information from the dataset, pre-process the data using Python for improved performance, use a structured query language to retrieve useful information from the database.
 
 Module 1: Cleaning the dataset
 
@@ -58,12 +49,9 @@ def export_the_dataset():
     df.to_csv('fatalities_cleaned.csv', index= false)
     return df
 
-#TASK 4: Load the Cleaned dataset 'fatalities_cleaned.csv' to the database provided.
-#follow the instruction in the Task 4 description and complete the task as per it.
+#TASK 4: Loaded the Cleaned dataset 'fatalities_cleaned.csv' to the database provided.
 
-#check if mysql table is created using "fatalities_cleaned"
-#Use this final dataset and upload it on the provided database for performing analysis in  MySQL
-#To run this task click on the terminal and click on the run project
+#Used this final dataset and uploaded it on the provided database for performing analysis in MySQL
 
 Module 2: Write SQL Query-
 1) What is the number of reported incidents?
@@ -72,7 +60,7 @@ The task is to calculate the total number of incidents reported in the given dat
 
 2) What is the year to year change for the number of fatal incidents?
 
-    The task is to calculates the year-to-year percentage changes(Round it of to nearest whole number) in the number of fatalities for each incident year, excluding the year 2022.
+    The task is to calculate year-to-year percentage changes(Round it off to the nearest whole number) in the number of fatalities for each incident year, excluding the year 2022.
 ----With table_year_incidents as (
 	select year(incident_date) as incident_year, count(*) as n_fatalities
 	from fatalities_cleaned
@@ -89,7 +77,7 @@ The task is to calculate the total number of incidents reported in the given dat
 3)What is the number of fatalities that received a citation?
 The task is to calculates the total number of fatalities that recieved a citation.
 ----select citation, count(*) from fatalities_cleaned 
-group by citation;
+    group by citation;
 
 4)What day of the week has the most fatalities and what is the overall percentage?
 The task is to calculates day of the week that reported more number of fatalities and percentage(Rounds the percentage to two decimal places).
@@ -103,40 +91,46 @@ The task is to calculates day of the week that reported more number of fatalitie
 
 5)What is the number of fatalities involving welding?
 The task is to calculates the total number of fatalities during welding.
-----select count(*) as welding_fatalities from fatalities_cleaned where description like '%weld%';
+----select count(*) as welding_fatalities 
+    from fatalities_cleaned where description like '%weld%';
 
 6)Select the last 5 from the previous query
 The task is to calculates the last 5 fatalities during welding.
-----select id, incident_date, day_of_week, city, state, description, plan, citation from fatalities_cleaned where description like '%weld%'
-order by incident_date desc
-limit 5;
+----select id, incident_date, day_of_week, city, state, description, plan, citation
+    from fatalities_cleaned where description like '%weld%'
+    order by incident_date desc
+    limit 5;
 
 7)Select the top 5 states with the most fatal incidents.
 The task is to calculates the top 5 states which have most fatal incidents.
-----select state, count(*) from fatalities_cleaned  
-group by state
-order by count(*) desc
-limit 5;
+----select state, count(*) 
+    from fatalities_cleaned  
+    group by state
+    order by count(*) desc
+    limit 5;
 
 8)What are the top 5 states that had the most workplace fatalities from stabbings?
 The task is to calculates the top 5 states which have most fatal incidents happed from stabbing.
-----select state, count(*) from fatalities_cleaned where description like '%stabbed%'
-group by state 
-order by count(*) desc
-limit 5;
+----select state, count(*) 
+    from fatalities_cleaned where description like '%stabbed%'
+    group by state 
+    order by count(*) desc
+    limit 5;
 
 9)What are the top 10 states that had the most workplace fatalities from shootings?
 The task is to calculates the top 10 states which have most fatal incidents happed from shooting.
-----select state, count(*) from fatalities_cleaned where description like '%shot%' 
-group by state
-order by count(*) desc 
-limit 10;
+----select state, count(*)
+    from fatalities_cleaned where description like '%shot%' 
+    group by state
+    order by count(*) desc 
+    limit 10;
 
 10)What is the total number of shooting deaths per year?
 The task is to calculates the total number of deaths caused by shooting each year.(In Decreasing order)
-----select year(incident_date) as year,count(*) as total_number_of_shooting_yearly from fatalities_cleaned where description like '%shot%' 
-group by year
-order by count(*) desc;
+----select year(incident_date) as year,count(*) as total_number_of_shooting_yearly
+    from fatalities_cleaned where description like '%shot%' 
+    group by year
+    order by count(*) desc;
 
 
 
